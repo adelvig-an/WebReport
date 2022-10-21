@@ -21,6 +21,21 @@ namespace WebReport.Controllers
             return View(usersList);
         }
 
+        //GET - CREATE
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        //POST - CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(User user)
+        {
+            _dataManager.User.SaveUser(user);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();

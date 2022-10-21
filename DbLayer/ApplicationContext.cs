@@ -7,11 +7,6 @@ namespace DbLayer
     {
         public DbSet<User> Users { get; set; } = null!;
 
-        public ApplicationContext()
-        {
-
-        }
-
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
 
@@ -20,9 +15,7 @@ namespace DbLayer
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {
                 optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=WebReportDb;Username=postgres;Password=1111");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder model)
