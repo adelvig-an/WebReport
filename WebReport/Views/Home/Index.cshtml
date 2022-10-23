@@ -42,9 +42,9 @@
                         <td>@obj.Login</td>
                         <td>@obj.Password</td>
                         <td>
-                            <a asp-route-id="@obj.Id" asp-action="Create">Редактировать</a> |
-                            <a>Посмотреть</a> |
-                            <a>Удалить</a>
+                            <a asp-route-id="@obj.Id" class="btn btn-primary" asp-action="Create">Редактировать</a>
+                            <a asp-route-id="@obj.Id" class="btn btn-primary">Посмотреть</a>
+                            <a asp-route-id="@obj.Id" class="btn btn-danger" asp-action="Delete">Удалить</a>
                         </td>
                     </tr>
                 }

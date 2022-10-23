@@ -8,7 +8,7 @@ namespace WebReport.Controllers
 {
     public class HomeController : Controller
     {
-        private DataManager _dataManager;
+        private readonly DataManager _dataManager;
 
         public HomeController(DataManager dataManager)
         {
@@ -22,17 +22,24 @@ namespace WebReport.Controllers
             return View(users);
         }
 
+        public IActionResult Delete(int id)
+        {
+            foreach(var user in _dataManager.User.GetAllUsers())
+                if (user.Id == id)
+                {
+                    _dataManager.User.DeleteUser(user);
+                }
+            return RedirectToAction("Index");
+        }
 
-        [HttpGet]
-        //[HttpGet("{id}")]
         //GET - CREATE
+        [HttpGet]
         public IActionResult Create(int id)
         {
             if (id != 0)
             {
                 var userSelected = _dataManager.User.GetUserById(id);
                 return View(userSelected);
-                
             }
             return View();
         }
