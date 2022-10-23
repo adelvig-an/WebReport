@@ -6,7 +6,7 @@ namespace BussinesLayer.Interface
     {
         IEnumerable<User> GetAllUsers();
         public User GetUserById(int userId);
-        void SaveUser (User user);
+        void SaveUpdateUser (User user);
         void DeleteUser (User user);
 
     }

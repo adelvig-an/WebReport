@@ -15,15 +15,25 @@ namespace WebReport.Controllers
             _dataManager = dataManager;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            List<User> usersList = _dataManager.User.GetAllUsers().ToList();
-            return View(usersList);
+            List<User> users = _dataManager.User.GetAllUsers().ToList();
+            return View(users);
         }
 
+
+        [HttpGet]
+        //[HttpGet("{id}")]
         //GET - CREATE
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            if (id != 0)
+            {
+                var userSelected = _dataManager.User.GetUserById(id);
+                return View(userSelected);
+                
+            }
             return View();
         }
 
@@ -32,7 +42,7 @@ namespace WebReport.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(User user)
         {
-            _dataManager.User.SaveUser(user);
+            _dataManager.User.SaveUpdateUser(user);
             return RedirectToAction("Index");
         }
 

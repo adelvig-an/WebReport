@@ -4,13 +4,20 @@
     <div class="border p-3">
 
         <div class="form-group row">
-            <h2 class="text-info pl-3">Add User</h2>
+            @if (Model == null)
+            {
+                <h2 class="text-info pl-3">Добавление пользователя</h2>
+            }
+            else
+            {
+                <h2 class="text-info pl-3">Редактирование пользователя</h2>
+            }
         </div>
         <div class="row">
             <div class="col-8">
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Login"></label>
+                        <label asp-for="Login">Ваш логин:</label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Login" class="form-control" />
@@ -19,7 +26,7 @@
 
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Password"></label>
+                        <label asp-for="Password">Ваш пароль:</label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Password" class="form-control" />
@@ -30,10 +37,10 @@
                     <div class="col-8 offset-4 row">
 
                         <div class="col">
-                            <input type="submit" class="btn btn-info w-100" value="Создать" />
+                            <input type="submit" class="btn btn-info w-100" value="Сохранить" />
                         </div>
                         <div class="col">
-                            <a asp-action="Index" class="btn btn-success w-100">Назад</a>
+                            <a asp-action="Index" class="btn btn-success w-100">Отмена</a>
                         </div>
                     </div>
                 </div>

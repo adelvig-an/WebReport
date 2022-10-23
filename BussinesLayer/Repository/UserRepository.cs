@@ -24,12 +24,16 @@ namespace BussinesLayer.Repository
             return _context.Users.First(x => x.Id == userId);
         }
 
-        public void SaveUser(User user)
+        public void SaveUpdateUser(User user)
         {
             if (user != null)
-                _context.Users.Add(user);
+                if (user.Id != 0)
+                    _context.Users.Update(user);
+                else
+                    _context.Users.Add(user);
             _context.SaveChanges();
         }
+
 
         public void DeleteUser(User user)
         {
