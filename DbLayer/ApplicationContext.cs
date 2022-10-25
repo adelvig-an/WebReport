@@ -7,6 +7,8 @@ namespace DbLayer
     {
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Report> Reports { get; set; } = null!;
+        public DbSet<Contract> Contracts { get; set; } = null!;
+        public DbSet<EvaluationTask> EvaluationTasks { get; set; } = null!;
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -22,6 +24,10 @@ namespace DbLayer
         protected override void OnModelCreating(ModelBuilder model)
         {
             base.OnModelCreating(model);
+            model.Entity<EvaluationTask>()
+                .Property(e => e.Target)
+                .HasConversion(v => v.ToString(),
+                v => (TargetType)Enum.Parse(typeof(TargetType), v));
             model.Entity<User>().HasData(
                 new
                 {
