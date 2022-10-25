@@ -49,8 +49,12 @@ namespace WebReport.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(User user)
         {
-            _dataManager.User.SaveUpdateUser(user);
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                _dataManager.User.SaveUpdateUser(user);
+                return RedirectToAction("Index");
+            }
+            return View(user);
         }
 
         public IActionResult Privacy()

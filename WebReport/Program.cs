@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IReportRepository, ReportRepository>();
 
 builder.Services.AddScoped<DataManager>();
 
