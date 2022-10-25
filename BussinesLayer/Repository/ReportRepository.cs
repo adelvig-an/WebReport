@@ -9,39 +9,39 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Repository
 {
-    public class ReportRepository : IReportRepository
+    public class ReportRepository : IRepository<Report>
     {
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
 
         public ReportRepository(ApplicationContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Report> GetAllReports()
+        public IEnumerable<Report> GetAll()
         {
             return _context.Set<Report>().ToList();
         }
 
-        public Report GetReportById(int reportId)
+        public Report GetById(int id)
         {
-            return _context.Reports.First(x => x.Id == reportId);
+            return _context.Reports.First(x => x.Id == id);
         }
 
-        public void SaveUpdateReport(Report report)
+        public void SaveUpdate(Report item)
         {
-            if (report != null)
-                if (report.Id != 0)
-                    _context.Reports.Update(report);
+            if (item != null)
+                if (item.Id != 0)
+                    _context.Reports.Update(item);
                 else
-                    _context.Reports.Add(report);
+                    _context.Reports.Add(item);
             _context.SaveChanges();
         }
 
 
-        public void DeleteReport(Report report)
+        public void Delete(Report item)
         {
-            _context.Reports.Remove(report);
+            _context.Reports.Remove(item);
             _context.SaveChanges();
         }
     }

@@ -18,16 +18,16 @@ namespace WebReport.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<User> users = _dataManager.User.GetAllUsers().ToList();
+            List<User> users = _dataManager.User.GetAll().ToList();
             return View(users);
         }
 
         public IActionResult Delete(int id)
         {
-            foreach(var user in _dataManager.User.GetAllUsers())
+            foreach(var user in _dataManager.User.GetAll())
                 if (user.Id == id)
                 {
-                    _dataManager.User.DeleteUser(user);
+                    _dataManager.User.Delete(user);
                 }
             return RedirectToAction("Index");
         }
@@ -38,7 +38,7 @@ namespace WebReport.Controllers
         {
             if (id != 0)
             {
-                var userSelected = _dataManager.User.GetUserById(id);
+                var userSelected = _dataManager.User.GetById(id);
                 return View(userSelected);
             }
             return View();
@@ -51,7 +51,7 @@ namespace WebReport.Controllers
         {
             if(ModelState.IsValid)
             {
-                _dataManager.User.SaveUpdateUser(user);
+                _dataManager.User.SaveUpdate(user);
                 return RedirectToAction("Index");
             }
             return View(user);

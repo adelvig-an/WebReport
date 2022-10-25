@@ -5,39 +5,39 @@ using Model;
 
 namespace BussinesLayer.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
 
         public UserRepository(ApplicationContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<User> GetAllUsers() 
+        public IEnumerable<User> GetAll() 
         { 
             return _context.Set<User>().ToList();
         }
 
-        public User GetUserById(int userId)
+        public User GetById(int id)
         {
-            return _context.Users.First(x => x.Id == userId);
+            return _context.Users.First(x => x.Id == id);
         }
 
-        public void SaveUpdateUser(User user)
+        public void SaveUpdate(User item)
         {
-            if (user != null)
-                if (user.Id != 0)
-                    _context.Users.Update(user);
+            if (item != null)
+                if (item.Id != 0)
+                    _context.Users.Update(item);
                 else
-                    _context.Users.Add(user);
+                    _context.Users.Add(item);
             _context.SaveChanges();
         }
 
 
-        public void DeleteUser(User user)
+        public void Delete(User item)
         {
-            _context.Users.Remove(user);
+            _context.Users.Remove(item);
             _context.SaveChanges();
         }
     }
