@@ -8,5 +8,10 @@ namespace WebReport.Controllers
         {
             return View();
         }
+
+        public IActionResult EvaluationTaskPage()
+        {
+            return View();
+        }
     }
 }
