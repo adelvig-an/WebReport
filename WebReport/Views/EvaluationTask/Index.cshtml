@@ -1,4 +1,5 @@
-﻿
+﻿@model List<Model.EvaluationTask>
+
 @{
     ViewData["Title"] = "Все заявки";
 }
@@ -12,9 +13,9 @@
         <div class="col-md-6">
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                 <div>
-                <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-primary">
+                <a asp-controller="EvaluationTask" asp-action="EvaluationTaskPage" class="btn btn-primary">
                     <i class="fa-solid fa-plus"></i>
-                    &nbsp;Add New</a>
+                    &nbsp;Новый отчет</a>
                 </div>
                 <div class="dropdown">
                 <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></a>
@@ -45,24 +46,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="#" class="text-body">253</a></td>
-                                <td>12.08.2022</td>
-                                <td>15.08.2022</td>
-                                <td>Иванов Иван Иванович</td>
-                                <td>Сергеев Егор Павлович</td>
-                                <td>Подписан</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="fa-solid fa-pen"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="fa-solid fa-trash"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><a href="#" class="text-body">@item.Number</a></td>
+                                    <td>@item.DateApplication</td>
+                                    <td>15.08.2022</td>
+                                    <td>Иванов Иван Иванович</td>
+                                    <td>Сергеев Егор Павлович</td>
+                                    <td>Подписан</td>
+                                    <td>
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item">
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Редактировать" class="px-2 text-primary"><i class="fa-solid fa-pen"></i></a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Удальть" class="px-2 text-danger"><i class="fa-solid fa-trash"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                            
                         </tbody>
                     </table>
                 </div>
