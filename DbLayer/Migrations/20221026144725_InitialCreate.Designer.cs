@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DbLayer.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221025142846_Inicial")]
-    partial class Inicial
+    [Migration("20221026144725_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,21 +52,14 @@ namespace DbLayer.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ContractId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("InspectionDate")
+                    b.Property<DateTime>("DateApplication")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("InspectionFeaures")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("IntendedUse")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ReportId")
+                    b.Property<int>("Number")
                         .HasColumnType("integer");
 
                     b.Property<string>("Target")
@@ -75,11 +68,33 @@ namespace DbLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContractId");
-
-                    b.HasIndex("ReportId");
-
                     b.ToTable("EvaluationTasks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2313),
+                            IntendedUse = "Для принятия управленческих решений",
+                            Number = 1235,
+                            Target = "MarketValue"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2316),
+                            IntendedUse = "Для предоставления в банк",
+                            Number = 540,
+                            Target = "MarketAndLiquidationValue"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2317),
+                            IntendedUse = "Для принятия управленческих решений",
+                            Number = 284,
+                            Target = "MarketValue"
+                        });
                 });
 
             modelBuilder.Entity("Model.Report", b =>
@@ -144,25 +159,6 @@ namespace DbLayer.Migrations
                             Login = "Niki",
                             Password = "password3"
                         });
-                });
-
-            modelBuilder.Entity("Model.EvaluationTask", b =>
-                {
-                    b.HasOne("Model.Contract", "Contract")
-                        .WithMany()
-                        .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.Report", "Report")
-                        .WithMany()
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Contract");
-
-                    b.Navigation("Report");
                 });
 #pragma warning restore 612, 618
         }

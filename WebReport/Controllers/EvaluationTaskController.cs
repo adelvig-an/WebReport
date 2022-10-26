@@ -8,14 +8,16 @@ namespace WebReport.Controllers
     {
         private readonly DataManager _dataManager;
         //Объект создан для теста
-        public EvaluationTask evaTask { get; set; }
+        public EvaluationTask _evaTask { get; set; }
         public EvaluationTaskController(DataManager dataManager)
         {
             _dataManager = dataManager;
             //Объект создан для теста
-            evaTask = new EvaluationTask()
+            _evaTask = new EvaluationTask()
             {
                 Number = 1543,
+                DateApplication = DateTime.Now,
+                Target = TargetType.MarketValue
             };
         }
 
@@ -34,7 +36,7 @@ namespace WebReport.Controllers
                 return View(taskSelected);
             }
             //Объект создан для теста
-            return View(evaTask);
+            return View(_evaTask);
         }
     }
 }

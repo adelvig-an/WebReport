@@ -67,6 +67,32 @@ namespace DbLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EvaluationTasks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2313),
+                            IntendedUse = "Для принятия управленческих решений",
+                            Number = 1235,
+                            Target = "MarketValue"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2316),
+                            IntendedUse = "Для предоставления в банк",
+                            Number = 540,
+                            Target = "MarketAndLiquidationValue"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2317),
+                            IntendedUse = "Для принятия управленческих решений",
+                            Number = 284,
+                            Target = "MarketValue"
+                        });
                 });
 
             modelBuilder.Entity("Model.Report", b =>

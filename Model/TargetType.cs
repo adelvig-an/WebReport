@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
     public enum TargetType
     {
-        [Description("Рыночная стоимость")]
+        [Display(Name = "Рыночная стоимость")]
         MarketValue = 0,
-        [Description("Рыночная и ликвидационная стоимость")]
+        [Display(Name = "Рыночная и ликвидационная стоимость")]
         MarketAndLiquidationValue = 1,
-        [Description("Ликвидационная стоимость")]
+        [Display(Name = "Ликвидационная стоимость")]
         LiquidationValue = 2,
-        [Description("Инвестиционная стоимость")]
+        [Display(Name = "Инвестиционная стоимость")]
         InvestmentValue = 3,
     }
 }

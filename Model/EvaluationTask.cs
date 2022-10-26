@@ -1,11 +1,17 @@
-﻿namespace Model
+﻿using System.ComponentModel;
+
+namespace Model
 {
     public class EvaluationTask
     {
         public int Id { get; set; }
+        [DisplayName("Номер заявки")]
         public int Number { get; set; }
+        [DisplayName("Дата заявки")]
         public DateTime DateApplication { get; set; }
+        [DisplayName("Тип стоимости")]
         public TargetType Target { get; set; }
+        [DisplayName("Предполагаемое использование результатов оценки")]
         public string IntendedUse { get; set; }
 
         //Временно закоментировал

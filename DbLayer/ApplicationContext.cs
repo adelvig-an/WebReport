@@ -28,6 +28,31 @@ namespace DbLayer
                 .Property(e => e.Target)
                 .HasConversion(v => v.ToString(),
                 v => (TargetType)Enum.Parse(typeof(TargetType), v));
+            model.Entity<EvaluationTask>().HasData(
+                new
+                {
+                    Id = 1,
+                    Number = 1235,
+                    DateApplication = DateTime.UtcNow,
+                    Target = TargetType.MarketValue,
+                    IntendedUse = "Для принятия управленческих решений"
+                },
+                new
+                {
+                    Id = 2,
+                    Number = 0540,
+                    DateApplication = DateTime.UtcNow,
+                    Target = TargetType.MarketAndLiquidationValue,
+                    IntendedUse = "Для предоставления в банк"
+                },
+                new
+                {
+                    Id = 3,
+                    Number = 0284,
+                    DateApplication = DateTime.UtcNow,
+                    Target = TargetType.MarketValue,
+                    IntendedUse = "Для принятия управленческих решений"
+                });
             model.Entity<User>().HasData(
                 new
                 {
