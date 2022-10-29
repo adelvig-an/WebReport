@@ -13,6 +13,8 @@ namespace Model
         public TargetType Target { get; set; }
         [DisplayName("Предполагаемое использование результатов оценки")]
         public string IntendedUse { get; set; }
+        [DisplayName("Тип заказчика")]
+        public CustomerType Customers { get; set; }
 
         //Временно закоментировал
         //Думаю где будет логичнее использование свойств осмотра

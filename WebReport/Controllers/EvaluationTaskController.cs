@@ -9,6 +9,7 @@ namespace WebReport.Controllers
         private readonly DataManager _dataManager;
         //Объект создан для теста
         public EvaluationTask _evaTask { get; set; }
+
         public EvaluationTaskController(DataManager dataManager)
         {
             _dataManager = dataManager;
@@ -19,7 +20,10 @@ namespace WebReport.Controllers
                 DateApplication = DateTime.Now,
                 Target = TargetType.MarketValue
             };
+
+            
         }
+
 
         [HttpGet]
         public IActionResult Index()
@@ -35,8 +39,27 @@ namespace WebReport.Controllers
                 var taskSelected = _dataManager.EvaluationTask.GetById(id);
                 return View(taskSelected);
             }
-            //Объект создан для теста
+
+
+            
+
+
             return View(_evaTask);
+        }
+
+        [HttpPost]
+        public IActionResult SelectedCustomer()
+        {
+            if (_evaTask.Customers == CustomerType.PrivatePerson)
+            {
+                return ViewBag._evaTask.IntendedUse = "Частное лицо";
+            }
+            else if (_evaTask.Customers == CustomerType.Organization)
+            {
+                return ViewBag._evaTask.IntendedUse = "Оранизачия";
+            }
+            else
+                return ViewBag._evaTask.IntendedUse = "";
         }
     }
 }

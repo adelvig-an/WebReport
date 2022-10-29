@@ -1,4 +1,5 @@
-﻿@model Model.EvaluationTask
+﻿@using Model
+@model Model.EvaluationTask
 
 @{
     ViewData["Title"] = "Заявка на оценку № 0154";
@@ -33,5 +34,34 @@
             </div>
         </div>
     </form>
+</div>
+<div class="row">
+    <div class="col">
+        <form method="post" asp-controller="EvaluationTask" asp-action="SelectedCustomer">
+            <div class="btn-group" rple="group">
+                <input asp-for="@Model.Customers" type="radio" value="@Model.Customers.HasFlag(CustomerType.PrivatePerson)"
+                       class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">Частное лицо</label>
+
+                <input asp-for="@Model.Customers" type="radio" value="@Model.Customers.HasFlag(CustomerType.Organization)" 
+                    class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Организация</label>
+            </div>
+            <br />
+            @if (Model.Customers == CustomerType.PrivatePerson)
+            {
+                ViewData["Message"] = "Частное лицо";
+            }
+            else if (Model.Customers == CustomerType.Organization)
+            {
+                ViewData["Message"] = "Организация";
+            }
+            else
+            {
+                ViewData["Message"] = "Не выбран";
+            }
+            @ViewData["Message"]
+        </form>
+    </div>
 </div>
 

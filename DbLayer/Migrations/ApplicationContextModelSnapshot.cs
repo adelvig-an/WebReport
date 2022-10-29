@@ -50,6 +50,10 @@ namespace DbLayer.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Customers")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("DateApplication")
                         .HasColumnType("timestamp with time zone");
 
@@ -72,7 +76,8 @@ namespace DbLayer.Migrations
                         new
                         {
                             Id = 1,
-                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2313),
+                            Customers = "Organization",
+                            DateApplication = new DateTime(2022, 10, 29, 2, 49, 42, 568, DateTimeKind.Utc).AddTicks(4641),
                             IntendedUse = "Для принятия управленческих решений",
                             Number = 1235,
                             Target = "MarketValue"
@@ -80,7 +85,8 @@ namespace DbLayer.Migrations
                         new
                         {
                             Id = 2,
-                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2316),
+                            Customers = "PrivatePerson",
+                            DateApplication = new DateTime(2022, 10, 29, 2, 49, 42, 568, DateTimeKind.Utc).AddTicks(4643),
                             IntendedUse = "Для предоставления в банк",
                             Number = 540,
                             Target = "MarketAndLiquidationValue"
@@ -88,7 +94,8 @@ namespace DbLayer.Migrations
                         new
                         {
                             Id = 3,
-                            DateApplication = new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2317),
+                            Customers = "PrivatePerson",
+                            DateApplication = new DateTime(2022, 10, 29, 2, 49, 42, 568, DateTimeKind.Utc).AddTicks(4644),
                             IntendedUse = "Для принятия управленческих решений",
                             Number = 284,
                             Target = "MarketValue"

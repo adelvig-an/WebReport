@@ -19,6 +19,7 @@ namespace DbLayer
         {
             if (!optionsBuilder.IsConfigured)
                 optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=WebReportDb;Username=postgres;Password=1111");
+            
         }
 
         protected override void OnModelCreating(ModelBuilder model)
@@ -28,6 +29,10 @@ namespace DbLayer
                 .Property(e => e.Target)
                 .HasConversion(v => v.ToString(),
                 v => (TargetType)Enum.Parse(typeof(TargetType), v));
+            model.Entity<EvaluationTask>()
+                .Property(e => e.Customers)
+                .HasConversion(v => v.ToString(),
+                v => (CustomerType)Enum.Parse(typeof(CustomerType), v));
             model.Entity<EvaluationTask>().HasData(
                 new
                 {
@@ -35,7 +40,8 @@ namespace DbLayer
                     Number = 1235,
                     DateApplication = DateTime.UtcNow,
                     Target = TargetType.MarketValue,
-                    IntendedUse = "Для принятия управленческих решений"
+                    IntendedUse = "Для принятия управленческих решений",
+                    Customers = CustomerType.Organization
                 },
                 new
                 {
@@ -43,7 +49,8 @@ namespace DbLayer
                     Number = 0540,
                     DateApplication = DateTime.UtcNow,
                     Target = TargetType.MarketAndLiquidationValue,
-                    IntendedUse = "Для предоставления в банк"
+                    IntendedUse = "Для предоставления в банк",
+                    Customers = CustomerType.PrivatePerson
                 },
                 new
                 {
@@ -51,7 +58,8 @@ namespace DbLayer
                     Number = 0284,
                     DateApplication = DateTime.UtcNow,
                     Target = TargetType.MarketValue,
-                    IntendedUse = "Для принятия управленческих решений"
+                    IntendedUse = "Для принятия управленческих решений",
+                    Customers = CustomerType.PrivatePerson
                 });
             model.Entity<User>().HasData(
                 new

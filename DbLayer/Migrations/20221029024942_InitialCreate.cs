@@ -33,7 +33,8 @@ namespace DbLayer.Migrations
                     Number = table.Column<int>(type: "integer", nullable: false),
                     DateApplication = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Target = table.Column<string>(type: "text", nullable: false),
-                    IntendedUse = table.Column<string>(type: "text", nullable: false)
+                    IntendedUse = table.Column<string>(type: "text", nullable: false),
+                    Customers = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,12 +72,12 @@ namespace DbLayer.Migrations
 
             migrationBuilder.InsertData(
                 table: "EvaluationTasks",
-                columns: new[] { "Id", "DateApplication", "IntendedUse", "Number", "Target" },
+                columns: new[] { "Id", "Customers", "DateApplication", "IntendedUse", "Number", "Target" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2313), "Для принятия управленческих решений", 1235, "MarketValue" },
-                    { 2, new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2316), "Для предоставления в банк", 540, "MarketAndLiquidationValue" },
-                    { 3, new DateTime(2022, 10, 26, 14, 47, 25, 247, DateTimeKind.Utc).AddTicks(2317), "Для принятия управленческих решений", 284, "MarketValue" }
+                    { 1, "Organization", new DateTime(2022, 10, 29, 2, 49, 42, 568, DateTimeKind.Utc).AddTicks(4641), "Для принятия управленческих решений", 1235, "MarketValue" },
+                    { 2, "PrivatePerson", new DateTime(2022, 10, 29, 2, 49, 42, 568, DateTimeKind.Utc).AddTicks(4643), "Для предоставления в банк", 540, "MarketAndLiquidationValue" },
+                    { 3, "PrivatePerson", new DateTime(2022, 10, 29, 2, 49, 42, 568, DateTimeKind.Utc).AddTicks(4644), "Для принятия управленческих решений", 284, "MarketValue" }
                 });
 
             migrationBuilder.InsertData(

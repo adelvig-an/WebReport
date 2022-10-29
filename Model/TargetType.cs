@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
@@ -12,6 +11,6 @@ namespace Model
         [Display(Name = "Ликвидационная стоимость")]
         LiquidationValue = 2,
         [Display(Name = "Инвестиционная стоимость")]
-        InvestmentValue = 3,
+        InvestmentValue = 3
     }
 }
