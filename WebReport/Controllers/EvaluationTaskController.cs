@@ -29,6 +29,14 @@ namespace WebReport.Controllers
         public IActionResult Index()
         {
             List<EvaluationTask> evaluationTasks = _dataManager.EvaluationTask.GetAll().ToList();
+            if (_evaTask.Customers == CustomerType.PrivatePerson)
+            {
+                _evaTask.Customers = CustomerType.PrivatePerson;
+            }
+            else if (_evaTask.Customers == CustomerType.Organization)
+            {
+                _evaTask.Customers = CustomerType.Organization;
+            }
             return View(evaluationTasks);
         }
 
@@ -39,27 +47,21 @@ namespace WebReport.Controllers
                 var taskSelected = _dataManager.EvaluationTask.GetById(id);
                 return View(taskSelected);
             }
-
-
-            
-
-
             return View(_evaTask);
         }
 
-        [HttpPost]
-        public IActionResult SelectedCustomer()
+        public IActionResult SelectedCustomer(CustomerType customerType)
         {
-            if (_evaTask.Customers == CustomerType.PrivatePerson)
+            if (customerType == CustomerType.PrivatePerson)
             {
-                return ViewBag._evaTask.IntendedUse = "Частное лицо";
-            }
-            else if (_evaTask.Customers == CustomerType.Organization)
-            {
-                return ViewBag._evaTask.IntendedUse = "Оранизачия";
+                _evaTask.Customers = CustomerType.PrivatePerson;
+                return View();
             }
             else
-                return ViewBag._evaTask.IntendedUse = "";
+            {
+                _evaTask.Customers = CustomerType.Organization;
+                return View();
+            }
         }
     }
 }
