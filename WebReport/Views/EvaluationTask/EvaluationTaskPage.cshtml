@@ -5,54 +5,73 @@
     ViewData["Title"] = "Заявка на оценку № 0154";
 }
 
-@*<div class="row">
-    <div class="col-12">
-        <h3>Заявка № Number</h3> <h4>от DateApplication.ToString("d")</h4>
-        <hr />
-    </div>
-    <!-- Form START -->
-    <form>
-        <div class="col-xxl-8 mb-5 mb-xxl-0">
-            <div class="bg-secondary-soft px-4 py-5 rounded">
-                <div class="row g-3">
-                    <h4 class="mb-4 mt-0">Задание на оценку</h4>
-                    <!-- First Name -->
-					<div class="col-md-6">
-						<label class="form-label">Тип стоимости</label>
-						<select class="from-select" asp-for="Target" asp-items="Html.GetEnumSelectList(typeof(TargetType))"></select>
-					</div>
-					<!-- Last name -->
-					<div class="col-md-6">
-					
-					</div>
-					<!-- Phone number -->
-					<div class="col-md-6">
-						<label class="form-label" asp-for="IntendedUse"></label>
-						<textarea rows="5" class="form-control" asp-for="IntendedUse"></textarea>
-					</div>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>*@
 <div class="row">
     <div class="col">
-        <form method="post">
-            @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
-            {
-                <input type="radio" asp-for="Customers" name="radioCustomer" id="@((int)customer)" class="btn-check" value="@customer" autocomplete="off">
-                @if (((int)customer) == 0)
+        Объект оценки
+    </div>
+    <div class="col">
+        <a class="btn btn-primary">Добавить объект</a>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-hover text-nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Тип объекта
+                </th>
+                <th>
+                    Назначение
+                </th>
+                <th>
+                    Адрес
+                </th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="form-label">Тип стоимости</label>
+    </div>
+    <div class="col">
+        <select class="from-select" asp-for="Target" asp-items="Html.GetEnumSelectList(typeof(TargetType))"></select>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="form-label" asp-for="IntendedUse"></label>
+        <textarea rows="5" class="form-control" asp-for="IntendedUse"></textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+       
+            <form method="post">
+            <div class="btn-group" role="group">
+                @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
                 {
-                    <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
+                    <input type="radio" asp-for="Customers" name="radioCustomer" id="@((int)customer)" 
+                    class="btn-check" value="@customer" autocomplete="off" checked="@((int)customer == 0)">
+                    @if (((int)customer) == 0)
+                    {
+                        <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
+                    }
+                    else
+                    {
+                        <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
+                    }
                 }
-                else
-                {
-                    <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
-                }
-            }
-            <br /><br />
-            <input type="submit" name="name" value="Submit" asp-action="SelecteCustomer" />
-        </form>
+            </div>
+                <br /><br />
+                <input type="submit" name="name" value="Submit" asp-action="SelecteCustomer" />
+            </form>
+        
     </div>
 </div>
 
