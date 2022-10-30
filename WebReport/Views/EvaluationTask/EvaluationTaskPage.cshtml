@@ -5,9 +5,9 @@
     ViewData["Title"] = "Заявка на оценку № 0154";
 }
 
-<div class="row">
+@*<div class="row">
     <div class="col-12">
-        <h3>Заявка № @Model.Number</h3> <h4>от @Model.DateApplication.ToString("d")</h4>
+        <h3>Заявка № Number</h3> <h4>от DateApplication.ToString("d")</h4>
         <hr />
     </div>
     <!-- Form START -->
@@ -19,7 +19,7 @@
                     <!-- First Name -->
 					<div class="col-md-6">
 						<label class="form-label">Тип стоимости</label>
-						<select class="from-select" asp-for="@Model.Target" asp-items="Html.GetEnumSelectList(typeof(Model.TargetType))"></select>
+						<select class="from-select" asp-for="Target" asp-items="Html.GetEnumSelectList(typeof(TargetType))"></select>
 					</div>
 					<!-- Last name -->
 					<div class="col-md-6">
@@ -34,30 +34,61 @@
             </div>
         </div>
     </form>
-</div>
+</div>*@
 <div class="row">
     <div class="col">
-        <div class="btn-group" rple="group">
-            @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
-            {
-                    <input type="radio" asp-for="Customers" class="btn-check" value="@((int)customer)">
-                    <label asp-for="Customers" class="btn btn-outline-primary">@customer</label>
-            }
-        </div>
-        <br />
-        @if (Model.Customers == CustomerType.PrivatePerson)
-        {
-            ViewData["Message"] = "Частное лицо";
-        }
-        else if (Model.Customers == CustomerType.Organization)
-        {
-            ViewData["Message"] = "Организация";
-        }
-        else
-        {
-            ViewData["Message"] = "Не выбран";
-        }
-        @ViewData["Message"]
+        <form method="post">
+            <div class="btn-group" role="group">
+                @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
+                {
+                    <input type="radio" asp-for="Customers" id="@((int)customer)" class="btn-check" value="@customer" autocomplete="off">
+                    @if (((int)customer) == 0)
+                    {
+                        <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
+                    }
+                    else
+                    {
+                        <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
+                    }
+                }
+                <br /><br />
+                <input type="submit" name="name" value="Submit" asp-action="SelecteCustomer" />
+            </div>
+
+
+        </form>
+
     </div>
 </div>
+
+
+@*Вдруг понадобится*@
+
+@*<input type="radio" class="btn-check" asp-for="Customers" id="Customer1" name="optradio" value="@((int)Model.Customers)" autocomplete="off" checked>
+<label asp-for="Customers" for="Customer1" class="btn btn-outline-primary">Частное лицо</label>
+<input type="radio" asp-for="Customers" id="Customer2" name="optradio" class="btn-check" value="1" autocomplete="off">
+<label asp-for="Customers" for="Customer2" class="btn btn-outline-primary">Организация</label>*@
+
+
+@*        <div class="btn-group" role="group" aria-label="Базовая группа переключателей радио">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">Радио 1</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2">Радио 2</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio3">Радио 3</label>
+        </div>*@
+
+@*        <div class="btn-group" role="group" aria-label="Базовая группа переключателей радио">
+
+
+        </div>*@
+
+
+
+
+
+
 

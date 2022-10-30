@@ -7,21 +7,10 @@ namespace WebReport.Controllers
     public class EvaluationTaskController : Controller
     {
         private readonly DataManager _dataManager;
-        //Объект создан для теста
-        public EvaluationTask _evaTask { get; set; }
 
         public EvaluationTaskController(DataManager dataManager)
         {
             _dataManager = dataManager;
-            //Объект создан для теста
-            _evaTask = new EvaluationTask()
-            {
-                Number = 1543,
-                DateApplication = DateTime.Now,
-                Target = TargetType.MarketValue
-            };
-
-            
         }
 
 
@@ -29,14 +18,6 @@ namespace WebReport.Controllers
         public IActionResult Index()
         {
             List<EvaluationTask> evaluationTasks = _dataManager.EvaluationTask.GetAll().ToList();
-            if (_evaTask.Customers == CustomerType.PrivatePerson)
-            {
-                _evaTask.Customers = CustomerType.PrivatePerson;
-            }
-            else if (_evaTask.Customers == CustomerType.Organization)
-            {
-                _evaTask.Customers = CustomerType.Organization;
-            }
             return View(evaluationTasks);
         }
 
@@ -47,21 +28,27 @@ namespace WebReport.Controllers
                 var taskSelected = _dataManager.EvaluationTask.GetById(id);
                 return View(taskSelected);
             }
-            return View(_evaTask);
+            return View();
         }
 
-        public IActionResult SelectedCustomer(CustomerType customerType)
+        [HttpPost]
+        public IActionResult SelecteCustomer(CustomerType customerType)
         {
+            string str = "Ничего не выбрано";
             if (customerType == CustomerType.PrivatePerson)
             {
-                _evaTask.Customers = CustomerType.PrivatePerson;
-                return View();
+                str = "Частное лицо";
+                return Content(str);
+            }
+            else if (customerType == CustomerType.Organization)
+            {
+                str = "Оргнизация";
+                return Content(str);
             }
             else
-            {
-                _evaTask.Customers = CustomerType.Organization;
-                return View();
-            }
+                return Content(str);
         }
+
+        
     }
 }
