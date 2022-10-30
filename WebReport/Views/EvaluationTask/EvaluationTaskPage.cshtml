@@ -38,36 +38,32 @@
 <div class="row">
     <div class="col">
         <form method="post">
-            <div class="btn-group" role="group">
-                @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
+            @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
+            {
+                <input type="radio" asp-for="Customers" name="radioCustomer" id="@((int)customer)" class="btn-check" value="@customer" autocomplete="off">
+                @if (((int)customer) == 0)
                 {
-                    <input type="radio" asp-for="Customers" id="@((int)customer)" class="btn-check" value="@customer" autocomplete="off">
-                    @if (((int)customer) == 0)
-                    {
-                        <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
-                    }
-                    else
-                    {
-                        <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
-                    }
+                    <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
                 }
-                <br /><br />
-                <input type="submit" name="name" value="Submit" asp-action="SelecteCustomer" />
-            </div>
-
-
+                else
+                {
+                    <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
+                }
+            }
+            <br /><br />
+            <input type="submit" name="name" value="Submit" asp-action="SelecteCustomer" />
         </form>
-
     </div>
 </div>
 
 
 @*Вдруг понадобится*@
 
-@*<input type="radio" class="btn-check" asp-for="Customers" id="Customer1" name="optradio" value="@((int)Model.Customers)" autocomplete="off" checked>
+@*<input type="radio" class="btn-check" asp-for="Customers" id="Customer1" name="optradio" value="0" autocomplete="off" checked>
 <label asp-for="Customers" for="Customer1" class="btn btn-outline-primary">Частное лицо</label>
 <input type="radio" asp-for="Customers" id="Customer2" name="optradio" class="btn-check" value="1" autocomplete="off">
 <label asp-for="Customers" for="Customer2" class="btn btn-outline-primary">Организация</label>*@
+
 
 
 @*        <div class="btn-group" role="group" aria-label="Базовая группа переключателей радио">
@@ -83,6 +79,18 @@
 
 @*        <div class="btn-group" role="group" aria-label="Базовая группа переключателей радио">
 
+            @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
+            {
+                <input type="radio" asp-for="Customers" id="@((int)customer)" class="btn-check" value="@((int)customer)" autocomplete="off">
+                @if (((int)customer) == 0)
+                {
+                    <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
+                }
+                else
+                {
+                    <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
+                }
+            }
 
         </div>*@
 

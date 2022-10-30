@@ -1,6 +1,7 @@
 ﻿using BussinesLayer;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using System.Drawing;
 
 namespace WebReport.Controllers
 {
@@ -32,21 +33,10 @@ namespace WebReport.Controllers
         }
 
         [HttpPost]
-        public IActionResult SelecteCustomer(CustomerType customerType)
+        public IActionResult SelecteCustomer(CustomerType radioCustomer)
         {
-            string str = "Ничего не выбрано";
-            if (customerType == CustomerType.PrivatePerson)
-            {
-                str = "Частное лицо";
-                return Content(str);
-            }
-            else if (customerType == CustomerType.Organization)
-            {
-                str = "Оргнизация";
-                return Content(str);
-            }
-            else
-                return Content(str);
+            string authData = $"color: {radioCustomer}";
+            return Content(authData);
         }
 
         
