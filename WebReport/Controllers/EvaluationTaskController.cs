@@ -35,10 +35,8 @@ namespace WebReport.Controllers
         [HttpPost]
         public IActionResult SelecteCustomer(CustomerType radioCustomer)
         {
-            string authData = $"color: {radioCustomer}";
+            string authData = $"Customer: {radioCustomer}";
             return Content(authData);
         }
-
-        
     }
 }
