@@ -1,7 +1,6 @@
 ﻿using BussinesLayer;
 using Microsoft.AspNetCore.Mvc;
 using Model;
-using System.Drawing;
 
 namespace WebReport.Controllers
 {
@@ -27,9 +26,20 @@ namespace WebReport.Controllers
             if (id != 0)
             {
                 var taskSelected = _dataManager.EvaluationTask.GetById(id);
+                //SelecteCustomer(taskSelected.Customers);
                 return View(taskSelected);
             }
+            SelecteCustomer(CustomerType.PrivatePerson);
             return View();
+        }
+
+        public IActionResult GetPartialCustomer(CustomerType radioCustomer)
+        {
+            if (radioCustomer == CustomerType.PrivatePerson)
+            {
+                return PartialView("_PartialPrivatePerson");
+            }
+            return PartialView("_PartialOrganization");
         }
 
         [HttpPost]
