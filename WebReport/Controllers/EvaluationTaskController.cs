@@ -33,7 +33,8 @@ namespace WebReport.Controllers
             return View();
         }
 
-        public IActionResult GetPartialCustomer(CustomerType radioCustomer)
+        [HttpGet]
+        public PartialViewResult GetPartialCustomer(CustomerType radioCustomer)
         {
             if (radioCustomer == CustomerType.PrivatePerson)
             {
@@ -41,6 +42,19 @@ namespace WebReport.Controllers
             }
             return PartialView("_PartialOrganization");
         }
+
+        [HttpGet]
+        public ActionResult _PartialPrivatePerson()
+        {
+            return PartialView("_PartialPrivatePerson");
+        }
+
+        [HttpGet]
+        public ActionResult _PartialOrganization()
+        {
+            return PartialView("_PartialOrganization");
+        }
+
 
         [HttpPost]
         public IActionResult SelecteCustomer(CustomerType radioCustomer)
