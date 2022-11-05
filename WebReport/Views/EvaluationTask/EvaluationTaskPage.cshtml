@@ -7,11 +7,19 @@
 <form method="post">
     <div class="row">
         <div class="col-3">
+            <label class="form-label">Исполнитель</label>
+        </div>
+        <div class="col">
+            <select class="from-select" asp-for="Target" asp-items="Html.GetEnumSelectList(typeof(TargetType))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
             <h4>
                 Объект оценки
             </h4>
         </div>
-        <div class="col">
+        <div class="col text-end">
             <a class="btn btn-primary">Добавить объект</a>
         </div>
     </div>
@@ -52,20 +60,18 @@
     </div>
     <div class="row">
         <div class="col">
-
-
             <div class="btn-group" role="group">
                 @foreach (var customer in Enum.GetValues(typeof(CustomerType)))
                 {
-                    <input type="radio" asp-for="Customers" name="radioCustomer" id="@((int)customer)"
+                    <input type="radio" asp-for="Customer.Customers" name="radioCustomer" id="@((int)customer)"
                        class="btn-check" value="@customer" autocomplete="off" checked="@((int)customer == 0)">
                     @if (((int)customer) == 0)
                     {
-                        <label asp-for="Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
+                        <label asp-for="Customer.Customers" for="0" class="btn btn-outline-primary">Частное лицо</label>
                     }
                     else
                     {
-                        <label asp-for="Customers" for="1" class="btn btn-outline-primary">Организация</label>
+                        <label asp-for="Customer.Customers" for="1" class="btn btn-outline-primary">Организация</label>
                     }
                 }
             </div>
@@ -74,8 +80,6 @@
 
     <div id="dyn_container"></div>
     
-    
-
 </form>
 
 @section Scripts{

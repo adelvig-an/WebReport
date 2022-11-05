@@ -12,9 +12,9 @@ namespace Model
         [DisplayName("Тип стоимости")]
         public TargetType Target { get; set; }
         [DisplayName("Предполагаемое использование результатов оценки")]
-        public string IntendedUse { get; set; }
+        public string IntendedUse { get; set; } = null!;
         [DisplayName("Тип заказчика")]
-        public CustomerType Customers { get; set; }
+        public virtual Customer Customer { get; set; } = null!;
 
         //Временно закоментировал
         //Думаю где будет логичнее использование свойств осмотра

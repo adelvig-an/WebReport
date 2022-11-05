@@ -26,21 +26,20 @@ namespace WebReport.Controllers
             if (id != 0)
             {
                 var taskSelected = _dataManager.EvaluationTask.GetById(id);
-                //SelecteCustomer(taskSelected.Customers);
                 return View(taskSelected);
             }
-            SelecteCustomer(CustomerType.PrivatePerson);
             return View();
         }
 
         [HttpGet]
         public PartialViewResult GetPartialCustomer(CustomerType radioCustomer)
         {
-            if (radioCustomer == CustomerType.PrivatePerson)
+            if (radioCustomer == CustomerType.Organization)
             {
-                return PartialView("_PartialPrivatePerson");
+                return PartialView("_PartialOrganization");
             }
-            return PartialView("_PartialOrganization");
+            return PartialView("_PartialPrivatePerson");
+            
         }
 
         [HttpGet]
@@ -53,14 +52,6 @@ namespace WebReport.Controllers
         public ActionResult _PartialOrganization()
         {
             return PartialView("_PartialOrganization");
-        }
-
-
-        [HttpPost]
-        public IActionResult SelecteCustomer(CustomerType radioCustomer)
-        {
-            string authData = $"Customer: {radioCustomer}";
-            return Content(authData);
         }
     }
 }
